@@ -1,4 +1,4 @@
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -6,14 +6,14 @@
     <title>Chasse au Trésor</title>
     <style>
         body {
-            background-image: url('https://st4.depositphotos.com/1000651/22320/i/450/depositphotos_223206466-stock-photo-old-grunge-blank-paper-sheet.jpg'); /* URL de ton image */
-            background-size: cover; /* L'image couvre tout l'écran */
-            background-position: center; /* Centrer l'image */
-            background-attachment: fixed; /* L'image reste fixe quand on scrolle */
+            background-image: url('https://st4.depositphotos.com/1000651/22320/i/450/depositphotos_223206466-stock-photo-old-grunge-blank-paper-sheet.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             font-family: 'Trebuchet MS', sans-serif;
             text-align: center;
             padding-top: 50px;
-            color: white; /* Couleur du texte pour qu'il soit bien visible sur l'arrière-plan */
+            color: white;
         }
         h1 {
             color: #d4af37;
@@ -44,9 +44,9 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0); /* Petit au début */
+            transform: translate(-50%, -50%) scale(0);
             width: 300px;
-            animation: zoomAnimation 2s forwards; /* Animation */
+            animation: zoomAnimation 2s forwards;
             z-index: 1000;
         }
         #success-animation img {
@@ -60,20 +60,18 @@
             font-size: 2em;
         }
 
-        /* Animation de zoom */
         @keyframes zoomAnimation {
             0% {
-                transform: translate(-50%, -50%) scale(0); /* Petit */
+                transform: translate(-50%, -50%) scale(0);
             }
             50% {
-                transform: translate(-50%, -50%) scale(1); /* Taille normale */
+                transform: translate(-50%, -50%) scale(1);
             }
             100% {
-                transform: translate(-50%, -50%) scale(3); /* Très grand */
+                transform: translate(-50%, -50%) scale(3);
             }
         }
 
-        /* Message d'erreur */
         #error-message {
             display: none;
             background-color: rgba(255, 0, 0, 0.8);
@@ -94,7 +92,6 @@
             cursor: pointer;
         }
 
-        /* Style de la roue dentée */
         #settings-btn {
             position: fixed;
             top: 20px;
@@ -112,14 +109,12 @@
             justify-content: center;
         }
 
-        /* Formulaire de paramètres */
         #settings-form {
             display: none;
             margin-top: 20px;
             text-align: center;
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
             h1 {
                 font-size: 2em;
@@ -140,7 +135,6 @@
 
     <h1 id="code-header">Entrez le Code Secret !</h1>
     
-    <!-- Zone pour chaque chiffre du code -->
     <div class="code-container" id="code-container">
         <input type="text" id="digit-1" maxlength="1" class="code-input">
         <input type="text" id="digit-2" maxlength="1" class="code-input">
@@ -152,23 +146,19 @@
 
     <button id="submit-btn">Valider</button>
 
-    <!-- Animation de succès -->
     <div id="success-animation">
         <div class="message">🎉 Bravo !🎉</div>
-        <img src="https://media.istockphoto.com/id/1160778039/fr/photo/coffre-au-tr%C3%A9sor-ouvrez-le-tronc-antique-avec-les-lumi%C3%A8res-magiques-brillantes-dans-lobscurit%C3%A9.jpg?s=612x612&w=0&k=20&c=5HE_AxWLvmN2VZLm5S9eCPFISL0WH3CU6ZqALi53jD4=" alt="Trésor"> <!-- Remplace par l'image de ton coffre -->        
+        <img src="https://media.istockphoto.com/id/1160778039/fr/photo/coffre-au-tr%C3%A9sor-ouvrez-le-tronc-antique-avec-les-lumi%C3%A8res-magiques-brillantes-dans-lobscurit%C3%A9.jpg?s=612x612&w=0&k=20&c=5HE_AxWLvmN2VZLm5S9eCPFISL0WH3CU6ZqALi53jD4=" alt="Trésor">        
     </div>
 
-    <!-- Message d'erreur -->
     <div id="error-message">
         Ce n'est pas le bon code, essaie encore !
         <br>
         <button id="retry-btn">Réessayer</button>
     </div>
 
-    <!-- Bouton de paramètres -->
     <button id="settings-btn">⚙️</button>
 
-    <!-- Formulaire de paramètres -->
     <div id="settings-form">
         <h2>Configurer le Code Secret</h2>
         <input type="text" id="new-code" maxlength="6" placeholder="Nouveau code (6 chiffres)">
@@ -176,7 +166,7 @@
     </div>
 
     <script>
-        let secretCode = ["1", "2", "3", "4", "5", "6"]; // Le code secret
+        let secretCode = ["1", "2", "3", "4", "5", "6"];
         const submitBtn = document.getElementById('submit-btn');
         const successAnimation = document.getElementById('success-animation');
         const errorMessage = document.getElementById('error-message');
@@ -199,24 +189,23 @@
 
             // Comparer avec le code secret
             if (JSON.stringify(enteredCode) === JSON.stringify(secretCode)) {
-                // Masquer le texte, les champs de saisie et le bouton
                 document.getElementById('code-header').style.display = 'none';
                 document.getElementById('code-container').style.display = 'none';
-                submitBtn.style.display = 'none'; // Masquer le bouton Valider
+                submitBtn.style.display = 'none';
 
-                successAnimation.style.display = 'block'; // Afficher l'animation
-                errorMessage.style.display = 'none'; // Cacher le message d'erreur
+                successAnimation.style.display = 'block'; 
+                errorMessage.style.display = 'none';
 
                 // Événement pour revenir à l'écran de saisie du code
-                document.addEventListener('click', resetGame); // Remplace la fonction pour réinitialiser
+                document.addEventListener('click', resetGame);
             } else {
-                errorMessage.style.display = 'block'; // Afficher le message d'erreur
+                errorMessage.style.display = 'block';
             }
         });
 
         // Fonction pour réessayer et réinitialiser les champs
         retryBtn.addEventListener('click', () => {
-            errorMessage.style.display = 'none'; // Cacher le message d'erreur
+            errorMessage.style.display = 'none';
             resetFields();
         });
 
@@ -230,9 +219,9 @@
             document.getElementById('digit-6').value = '';
             document.getElementById('code-header').style.display = 'block';
             document.getElementById('code-container').style.display = 'flex';
-            submitBtn.style.display = 'block'; // Afficher le bouton Valider
-            successAnimation.style.display = 'none'; // Cacher l'animation
-            document.removeEventListener('click', resetGame); // Enlever l'événement de clic
+            submitBtn.style.display = 'block';
+            successAnimation.style.display = 'none'; 
+            document.removeEventListener('click', resetGame);
         }
 
         // Fonction pour réinitialiser le jeu
@@ -249,13 +238,22 @@
         setCodeBtn.addEventListener('click', () => {
             const newCode = newCodeInput.value.split('');
             if (newCode.length === 6 && newCode.every(digit => /^[0-9]$/.test(digit))) {
-                secretCode = newCode; // Mettre à jour le code secret
-                newCodeInput.value = ''; // Réinitialiser le champ
-                settingsForm.style.display = 'none'; // Cacher le formulaire
-                alert('Le code secret a été mis à jour !'); // Alerte pour confirmer la mise à jour
+                secretCode = newCode; 
+                newCodeInput.value = ''; 
+                settingsForm.style.display = 'none'; 
+                alert('Le code secret a été mis à jour !'); 
             } else {
-                alert('Veuillez entrer un code valide de 6 chiffres.'); // Alerte d'erreur
+                alert('Veuillez entrer un code valide de 6 chiffres.'); 
             }
+        });
+
+        // Focus automatique sur la prochaine case quand un chiffre est entré
+        document.querySelectorAll('.code-input').forEach((input, index, inputs) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && inputs[index + 1]) {
+                    inputs[index + 1].focus();
+                }
+            });
         });
     </script>
 </body>
