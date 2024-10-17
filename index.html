@@ -160,9 +160,10 @@
 
             // Comparer avec le code secret
             if (JSON.stringify(enteredCode) === JSON.stringify(secretCode)) {
-                // Masquer le texte et les champs de saisie
+                // Masquer le texte, les champs de saisie et le bouton
                 document.getElementById('code-header').style.display = 'none';
                 document.getElementById('code-container').style.display = 'none';
+                submitBtn.style.display = 'none'; // Masquer le bouton Valider
 
                 successAnimation.style.display = 'block'; // Afficher l'animation
                 errorMessage.style.display = 'none'; // Cacher le message d'erreur
@@ -181,9 +182,10 @@
             document.getElementById('digit-5').value = '';
             document.getElementById('digit-6').value = '';
             document.getElementById('digit-1').focus(); // Re-focus sur la première case
-            // Réafficher le texte et les champs de saisie
+            // Réafficher le texte, les champs de saisie et le bouton
             document.getElementById('code-header').style.display = 'block';
             document.getElementById('code-container').style.display = 'block';
+            submitBtn.style.display = 'block'; // Réafficher le bouton Valider
         });
 
         // Focus automatique sur la prochaine case quand un chiffre est entré
