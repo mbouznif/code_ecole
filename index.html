@@ -198,6 +198,9 @@
                 successAnimation.style.display = 'block'; 
                 errorMessage.style.display = 'none';
 
+                // Lancer l'animation
+                successAnimation.style.transform = 'translate(-50%, -50%) scale(1)';
+
                 // Événement pour revenir à l'écran de saisie du code
                 document.addEventListener('click', resetGame);
             } else {
@@ -223,17 +226,19 @@
             document.getElementById('code-container').style.display = 'block';
             submitBtn.style.display = 'block';
             successAnimation.style.display = 'none'; 
+            successAnimation.style.transform = 'translate(-50%, -50%) scale(0)';
             document.removeEventListener('click', resetGame);
         }
 
         // Fonction pour réinitialiser le jeu
         function resetGame() {
             resetFields();
+            successAnimation.style.display = 'none';
         }
 
-        // Afficher le formulaire de paramètres
+        // Ouvrir/fermer les paramètres
         settingsBtn.addEventListener('click', () => {
-            settingsForm.style.display = settingsForm.style.display === 'none' || settingsForm.style.display === '' ? 'block' : 'none';
+            settingsForm.style.display = settingsForm.style.display === 'none' ? 'block' : 'none';
         });
 
         // Mise à jour du code secret
@@ -258,5 +263,6 @@
             });
         });
     </script>
+
 </body>
 </html>
