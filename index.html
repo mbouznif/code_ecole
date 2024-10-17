@@ -201,8 +201,10 @@
                 // Lancer l'animation
                 successAnimation.style.transform = 'translate(-50%, -50%) scale(1)';
 
-                // Événement pour revenir à l'écran de saisie du code
-                document.addEventListener('click', resetGameOnce);
+                // Lancer l'événement pour revenir à l'écran de saisie après l'animation
+                setTimeout(() => {
+                    document.addEventListener('click', resetGameOnce);
+                }, 2000); // Délai de 2 secondes (ajustez selon la durée de l'animation)
             } else {
                 errorMessage.style.display = 'block';
             }
@@ -227,7 +229,6 @@
             submitBtn.style.display = 'block';
             successAnimation.style.display = 'none'; 
             successAnimation.style.transform = 'translate(-50%, -50%) scale(0)';
-            document.removeEventListener('click', resetGameOnce); // Retirer l'événement pour éviter les clics multiples
         }
 
         // Ouvrir/fermer les paramètres
@@ -260,6 +261,7 @@
         // Fonction pour réinitialiser le jeu au clic
         function resetGameOnce() {
             resetFields();
+            document.removeEventListener('click', resetGameOnce); // Retirer l'événement pour éviter les clics multiples
         }
     </script>
 
