@@ -69,8 +69,29 @@
                 transform: translate(-50%, -50%) scale(1); /* Taille normale */
             }
             100% {
-                transform: translate(-50%, -50%) scale(5); /* Très grand */
+                transform: translate(-50%, -50%) scale(7); /* Très grand */
             }
+        }
+
+        /* Message d'erreur */
+        #error-message {
+            display: none;
+            background-color: rgba(255, 0, 0, 0.8);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.5em;
+        }
+        #retry-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #d4af37;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -93,13 +114,21 @@
     <!-- Animation de succès -->
     <div id="success-animation">
         <img src="https://media.istockphoto.com/id/1160778039/fr/photo/coffre-au-tr%C3%A9sor-ouvrez-le-tronc-antique-avec-les-lumi%C3%A8res-magiques-brillantes-dans-lobscurit%C3%A9.jpg?s=612x612&w=0&k=20&c=5HE_AxWLvmN2VZLm5S9eCPFISL0WH3CU6ZqALi53jD4=" alt="Trésor"> <!-- Remplace par l'image de ton coffre -->
-        <div class="message">🎉 Bravo ! Vous avez trouvé le trésor ! 🎉</div>
+    </div>
+
+    <!-- Message d'erreur -->
+    <div id="error-message">
+        Ce n'est pas le bon code, essaie encore !
+        <br>
+        <button id="retry-btn">Réessayer</button>
     </div>
 
     <script>
         const secretCode = ["1", "2", "3", "4", "5", "6"]; // Le code secret
         const submitBtn = document.getElementById('submit-btn');
         const successAnimation = document.getElementById('success-animation');
+        const errorMessage = document.getElementById('error-message');
+        const retryBtn = document.getElementById('retry-btn');
 
         // Fonction de validation
         submitBtn.addEventListener('click', () => {
@@ -115,9 +144,22 @@
             // Comparer avec le code secret
             if (JSON.stringify(enteredCode) === JSON.stringify(secretCode)) {
                 successAnimation.style.display = 'block'; // Afficher l'animation
+                errorMessage.style.display = 'none'; // Cacher le message d'erreur
             } else {
-                alert("Mauvais code, réessayez !");
+                errorMessage.style.display = 'block'; // Afficher le message d'erreur
             }
+        });
+
+        // Fonction pour réessayer et réinitialiser les champs
+        retryBtn.addEventListener('click', () => {
+            errorMessage.style.display = 'none'; // Cacher le message d'erreur
+            document.getElementById('digit-1').value = '';
+            document.getElementById('digit-2').value = '';
+            document.getElementById('digit-3').value = '';
+            document.getElementById('digit-4').value = '';
+            document.getElementById('digit-5').value = '';
+            document.getElementById('digit-6').value = '';
+            document.getElementById('digit-1').focus(); // Re-focus sur la première case
         });
 
         // Focus automatique sur la prochaine case quand un chiffre est entré
