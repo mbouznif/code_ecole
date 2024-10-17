@@ -236,4 +236,27 @@
             settingsForm.style.display = settingsForm.style.display === 'none' || settingsForm.style.display === '' ? 'block' : 'none';
         });
 
-        //
+        // Mise à jour du code secret
+        setCodeBtn.addEventListener('click', () => {
+            let newCode = newCodeInput.value.split('');
+            if (newCode.length === 6 && newCode.every(digit => /^[0-9]$/.test(digit))) {
+                secretCode = newCode;
+                newCodeInput.value = '';
+                settingsForm.style.display = 'none';
+                alert('Le code secret a été mis à jour !');
+            } else {
+                alert('Veuillez entrer un code valide de 6 chiffres.');
+            }
+        });
+
+        // Focus automatique sur la prochaine case quand un chiffre est entré
+        document.querySelectorAll('.code-input').forEach((input, index, inputs) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && inputs[index + 1]) {
+                    inputs[index + 1].focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
