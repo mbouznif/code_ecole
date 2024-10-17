@@ -3,92 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chasse au trésor</title>
+    <title>Chasse au Trésor</title>
     <style>
         body {
-            background-color: #f2e7c9;
+            background-image: url('https://st4.depositphotos.com/1000651/22320/i/450/depositphotos_223206466-stock-photo-old-grunge-blank-paper-sheet.jpg'); /* URL de ton image */
+            background-size: cover; /* L'image couvre tout l'écran */
+            background-position: center; /* Centrer l'image */
+            background-attachment: fixed; /* L'image reste fixe quand on scrolle */
             font-family: 'Trebuchet MS', sans-serif;
             text-align: center;
             padding-top: 50px;
+            color: white; /* Couleur du texte pour qu'il soit bien visible sur l'arrière-plan */
         }
         h1 {
-            color: #4a4a4a;
+            color: #d4af37;
+            font-size: 3em;
+            margin-bottom: 20px;
         }
-        #code-input {
-            padding: 10px;
-            font-size: 18px;
-            border: 2px solid #d4af37;
-            border-radius: 5px;
+        .code-input {
+            width: 60px;
+            height: 60px;
+            font-size: 2em;
+            text-align: center;
+            margin: 5px;
+            border: 3px solid #d4af37;
+            border-radius: 10px;
         }
         #submit-btn {
-            padding: 10px 20px;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5em;
             background-color: #d4af37;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
         }
         #success-animation {
             display: none;
             margin-top: 20px;
+        }
+        #success-animation img {
+            width: 300px;
+            margin-top: 20px;
+        }
+        .code-container {
+            margin-bottom: 20px;
+        }
+        .message {
             color: #4CAF50;
-            font-size: 30px;
-        }
-        /* Simple keyframe animation */
-        @keyframes confetti {
-            0% {transform: translateY(0);}
-            100% {transform: translateY(100vh);}
-        }
-        .confetti {
-            width: 10px;
-            height: 10px;
-            background-color: gold;
-            position: fixed;
-            top: 0;
-            left: calc(50% - 5px);
-            animation: confetti 2s ease-out infinite;
+            font-size: 2em;
         }
     </style>
 </head>
 <body>
 
-    <h1>Entrez le code secret !</h1>
-    <input type="text" id="code-input" maxlength="6" placeholder="Code à 6 chiffres">
+    <h1>Entrez le Code Secret !</h1>
+    
+    <!-- Zone pour chaque chiffre du code -->
+    <div class="code-container">
+        <input type="text" id="digit-1" maxlength="1" class="code-input">
+        <input type="text" id="digit-2" maxlength="1" class="code-input">
+        <input type="text" id="digit-3" maxlength="1" class="code-input">
+        <input type="text" id="digit-4" maxlength="1" class="code-input">
+        <input type="text" id="digit-5" maxlength="1" class="code-input">
+        <input type="text" id="digit-6" maxlength="1" class="code-input">
+    </div>
+
     <button id="submit-btn">Valider</button>
 
+    <!-- Animation de succès -->
     <div id="success-animation">
-        🎉 Bravo ! Vous avez trouvé le bon code ! 🎉
-        <div id="confetti-container"></div>
+        <div class="message">🎉 Bravo ! Vous avez trouvé le trésor ! 🎉</div>
+        <img src="https://cdn.pixabay.com/photo/2023/06/14/18/22/ai-generated-8063802_1280.jpg" alt="Trésor">
     </div>
 
     <script>
-        const secretCode = "123456"; // Ton code secret ici
-        const codeInput = document.getElementById('code-input');
+        const secretCode = ["1", "2", "3", "4", "5", "6"]; // Le code secret
         const submitBtn = document.getElementById('submit-btn');
         const successAnimation = document.getElementById('success-animation');
-        const confettiContainer = document.getElementById('confetti-container');
 
-        // Fonction pour générer des confettis
-        function generateConfetti() {
-            for (let i = 0; i < 100; i++) {
-                let confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-                confettiContainer.appendChild(confetti);
-            }
-        }
-
+        // Fonction de validation
         submitBtn.addEventListener('click', () => {
-            if (codeInput.value === secretCode) {
+            let enteredCode = [
+                document.getElementById('digit-1').value,
+                document.getElementById('digit-2').value,
+                document.getElementById('digit-3').value,
+                document.getElementById('digit-4').value,
+                document.getElementById('digit-5').value,
+                document.getElementById('digit-6').value
+            ];
+
+            // Comparer avec le code secret
+            if (JSON.stringify(enteredCode) === JSON.stringify(secretCode)) {
                 successAnimation.style.display = 'block';
-                generateConfetti();
             } else {
                 alert("Mauvais code, réessayez !");
             }
+        });
+
+        // Focus automatique sur la prochaine case quand un chiffre est entré
+        document.querySelectorAll('.code-input').forEach((input, index, inputs) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && inputs[index + 1]) {
+                    inputs[index + 1].focus();
+                }
+            });
         });
     </script>
 
 </body>
 </html>
-
