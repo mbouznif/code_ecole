@@ -94,6 +94,30 @@
             cursor: pointer;
         }
 
+        /* Style de la roue dentée */
+        #settings-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #d4af37;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Formulaire de paramètres */
+        #settings-form {
+            display: none;
+            margin-top: 20px;
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             h1 {
@@ -140,14 +164,28 @@
         <button id="retry-btn">Réessayer</button>
     </div>
 
+    <!-- Bouton de paramètres -->
+    <button id="settings-btn">⚙️</button>
+
+    <!-- Formulaire de paramètres -->
+    <div id="settings-form">
+        <h2>Configurer le Code Secret</h2>
+        <input type="text" id="new-code" maxlength="6" placeholder="Nouveau code (6 chiffres)">
+        <button id="set-code-btn">Valider</button>
+    </div>
+
     <script>
-        const secretCode = ["1", "2", "3", "4", "5", "6"]; // Le code secret
+        let secretCode = ["1", "2", "3", "4", "5", "6"]; // Le code secret
         const submitBtn = document.getElementById('submit-btn');
         const successAnimation = document.getElementById('success-animation');
         const errorMessage = document.getElementById('error-message');
         const retryBtn = document.getElementById('retry-btn');
+        const settingsBtn = document.getElementById('settings-btn');
+        const settingsForm = document.getElementById('settings-form');
+        const setCodeBtn = document.getElementById('set-code-btn');
+        const newCodeInput = document.getElementById('new-code');
 
-        // Fonction de validation
+        // Fonction de validation du code
         submitBtn.addEventListener('click', () => {
             let enteredCode = [
                 document.getElementById('digit-1').value,
@@ -167,6 +205,11 @@
 
                 successAnimation.style.display = 'block'; // Afficher l'animation
                 errorMessage.style.display = 'none'; // Cacher le message d'erreur
+
+                // Événement pour revenir à l'écran de saisie du code
+                document.addEventListener('click', () => {
+                    resetGame();
+                });
             } else {
                 errorMessage.style.display = 'block'; // Afficher le message d'erreur
             }
@@ -175,28 +218,10 @@
         // Fonction pour réessayer et réinitialiser les champs
         retryBtn.addEventListener('click', () => {
             errorMessage.style.display = 'none'; // Cacher le message d'erreur
+            resetFields();
+        });
+
+        // Fonction pour réinitialiser les champs et l'état du jeu
+        function resetFields() {
             document.getElementById('digit-1').value = '';
-            document.getElementById('digit-2').value = '';
-            document.getElementById('digit-3').value = '';
-            document.getElementById('digit-4').value = '';
-            document.getElementById('digit-5').value = '';
-            document.getElementById('digit-6').value = '';
-            document.getElementById('digit-1').focus(); // Re-focus sur la première case
-            // Réafficher le texte, les champs de saisie et le bouton
-            document.getElementById('code-header').style.display = 'block';
-            document.getElementById('code-container').style.display = 'block';
-            submitBtn.style.display = 'block'; // Réafficher le bouton Valider
-        });
-
-        // Focus automatique sur la prochaine case quand un chiffre est entré
-        document.querySelectorAll('.code-input').forEach((input, index, inputs) => {
-            input.addEventListener('input', () => {
-                if (input.value.length === 1 && inputs[index + 1]) {
-                    inputs[index + 1].focus();
-                }
-            });
-        });
-    </script>
-
-</body>
-</html>
+            document.getElementById
