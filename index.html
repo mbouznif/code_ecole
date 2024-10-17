@@ -19,6 +19,12 @@
             color: #d4af37;
             font-size: 3em;
             margin-bottom: 20px;
+            position: relative; /* Pour le conteneur */
+            display: inline-block; /* Permet de centrer et de donner une taille */
+            padding: 10px; /* Pour le contraste avec le trait noir */
+            border: 2px solid black; /* Trait noir autour du texte */
+            border-radius: 10px; /* Arrondir les bords si souhaité */
+            background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour contraste */
         }
         .code-input {
             width: 60px;
@@ -39,6 +45,7 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            display: inline-block; /* Ajouté pour centrer */
         }
         #success-animation {
             display: none;
@@ -146,7 +153,9 @@
         <input type="text" id="digit-6" maxlength="1" class="code-input">
     </div>
 
-    <button id="submit-btn">Valider</button>
+    <div>
+        <button id="submit-btn">Valider</button>
+    </div>
 
     <div id="success-animation">
         <div class="message">🎉 Bravo !🎉</div>
@@ -224,11 +233,11 @@
             document.getElementById('digit-4').value = '';
             document.getElementById('digit-5').value = '';
             document.getElementById('digit-6').value = '';
-            document.getElementById('code-header').style.display = 'block';
-            document.getElementById('code-container').style.display = 'block';
-            submitBtn.style.display = 'block';
-            successAnimation.style.display = 'none'; 
-            successAnimation.style.transform = 'translate(-50%, -50%) scale(0)';
+            document.getElementById('digit-1').focus();
+            document.getElementById('code-header').style.display = 'block'; // Afficher l'en-tête
+            document.getElementById('code-container').style.display = 'inline-block'; // Rendre visible le conteneur
+            submitBtn.style.display = 'inline-block'; // Rendre visible le bouton
+            successAnimation.style.display = 'none'; // Cacher l'animation de succès
         }
 
         // Ouvrir/fermer les paramètres
