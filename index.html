@@ -16,15 +16,17 @@
             color: white;
         }
         h1 {
-            color: #d4af37;
             font-size: 3em;
             margin-bottom: 20px;
             position: relative;
             display: inline-block; /* Permet de centrer et de donner une taille */
-            padding: 10px;
-            border: 2px solid black;
-            border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: transparent; /* Fond transparent pour le texte */
+            color: #d4af37; /* Couleur dorée */
+            text-shadow: 
+                1px 1px 0px black,  /* Ombre pour la bordure à gauche */
+                -1px -1px 0px black, /* Ombre pour la bordure à droite */
+                1px -1px 0px black,  /* Ombre pour la bordure en haut */
+                -1px 1px 0px black;  /* Ombre pour la bordure en bas */
         }
         .code-container {
             display: flex; /* Utilisation de flexbox pour centrer les cases */
@@ -225,7 +227,7 @@
             resetFields();
         });
 
-        // Fonction pour réinitialiser les champs et l'état du jeu
+        // Fonction pour réinitialiser le jeu
         function resetFields() {
             document.getElementById('digit-1').value = '';
             document.getElementById('digit-2').value = '';
@@ -235,7 +237,7 @@
             document.getElementById('digit-6').value = '';
             document.getElementById('digit-1').focus();
             document.getElementById('code-header').style.display = 'block'; 
-            document.getElementById('code-container').style.display = 'inline-block'; 
+            document.getElementById('code-container').style.display = 'flex'; 
             submitBtn.style.display = 'inline-block'; 
             successAnimation.style.display = 'none'; 
         }
