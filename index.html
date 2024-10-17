@@ -41,11 +41,16 @@
         }
         #success-animation {
             display: none;
-            margin-top: 20px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0); /* Petit au début */
+            width: 300px;
+            animation: zoomAnimation 2s forwards; /* Animation */
+            z-index: 1000;
         }
         #success-animation img {
-            width: 300px;
-            margin-top: 20px;
+            width: 100%;
         }
         .code-container {
             margin-bottom: 20px;
@@ -53,6 +58,19 @@
         .message {
             color: #4CAF50;
             font-size: 2em;
+        }
+
+        /* Animation de zoom */
+        @keyframes zoomAnimation {
+            0% {
+                transform: translate(-50%, -50%) scale(0); /* Petit */
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1); /* Taille normale */
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(10); /* Très grand */
+            }
         }
     </style>
 </head>
@@ -74,8 +92,7 @@
 
     <!-- Animation de succès -->
     <div id="success-animation">
-        <div class="message">🎉 Bravo ! Vous avez trouvé le trésor ! 🎉</div>
-        <img src="https://cdn.pixabay.com/photo/2023/06/14/18/22/ai-generated-8063802_1280.jpg" alt="Trésor">
+        <img src="https://media.istockphoto.com/id/1160778039/fr/photo/coffre-au-tr%C3%A9sor-ouvrez-le-tronc-antique-avec-les-lumi%C3%A8res-magiques-brillantes-dans-lobscurit%C3%A9.jpg?s=612x612&w=0&k=20&c=5HE_AxWLvmN2VZLm5S9eCPFISL0WH3CU6ZqALi53jD4=" alt="Trésor"> <!-- Remplace par l'image de ton coffre -->
     </div>
 
     <script>
@@ -96,7 +113,7 @@
 
             // Comparer avec le code secret
             if (JSON.stringify(enteredCode) === JSON.stringify(secretCode)) {
-                successAnimation.style.display = 'block';
+                successAnimation.style.display = 'block'; // Afficher l'animation
             } else {
                 alert("Mauvais code, réessayez !");
             }
